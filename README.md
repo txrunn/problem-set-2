@@ -3,7 +3,7 @@ PROBLEM SET #4: PLOTS
 Instructions:
 - Clone the Problem Set code package from GitHub:
 - Remember to spend some time to get to know the data before you start on pre-processing and analysis
-- Run `pip install - r requirements.txt`
+- Run `pip install -r requirements.txt`
 - Run main.py and then work through each of the five PARTS of the Problem Set
 
 Before you start:
