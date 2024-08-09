@@ -2,9 +2,9 @@ PROBLEM SET #4: PLOTS
 
 Instructions:
 - Clone the Problem Set code package from GitHub:
-- You will use two CSV files already included in the `data/` directory
-    - Remember to spend some time to get to know the data before you start on pre-processing and analysis
-- Each of the .py files in `src/` contain instructions for the exepected code you are to write
+- Remember to spend some time to get to know the data before you start on pre-processing and analysis
+- Run `pip install - r requirements.txt`
+- Run main.py and then work through each of the five PARTS of the Problem Set
 
 Before you start:
 - Make sure to setup a virtual environment as discussed in the Course Tech Setup lecture. Here's a short article as an additional resource: https://www.freecodecamp.org/news/python-requirementstxt-explained/
