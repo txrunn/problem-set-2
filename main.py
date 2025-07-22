@@ -1,5 +1,5 @@
 '''
-- You will run Problem Set 4 from this .py, so make sure to set things up to return outputs accordingly
+- You will run Problem Set 2 from this .py, so make sure to set things up to return outputs accordingly
 - Go through each PART and write code / make updates as necessary to produce all required outputs
 - Run main.py before you start
 '''
