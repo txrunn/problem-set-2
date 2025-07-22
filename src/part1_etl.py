@@ -1,6 +1,6 @@
 '''
 PART 1: ETL
-- This code sets up the datasets for Problem Set 4
+- This code sets up the datasets for Problem Set 2
 - NOTE: You will update this code for PART 4: CATEGORICAL PLOTS
 '''
 
