@@ -29,25 +29,21 @@ def main():
     part2.scatterplot(pred_universe)
 
     ##  PART 3: BAR PLOTS AND HISTOGRAMS  ##
-    # 1
-
-    # 2
-
-    # 3
-
-    # 4
+    part3.barplot_fta(pred_universe)
+    part3.barplot_fta_by_sex(pred_universe)
+    part3.histogram_age(pred_universe)
+    part3.histogram_age_binned(pred_universe)
 
     ##  PART 4: CATEGORICAL PLOTS  ##
-    # 1
-    
-    # 2
-
-    # 3
+    felony_charge = part4.generate_felony_charge_df(arrest_events)
+    merged_df = part4.merge_felony_with_universe(felony_charge, pred_universe)
+    part4.plot_felony_prediction_by_charge(merged_df)
+    part4.plot_nonfelony_prediction_by_charge(merged_df)
+    part4.plot_felony_prediction_by_charge_and_actual(merged_df)
 
     ##  PART 5: SCATTERPLOTS  ##
-    # 1
-    
-    # 2
+    part5.scatter_prediction_by_current_charge(merged_df)
+    part5.scatter_prediction_vs_outcome(merged_df)
 
 
 if __name__ == "__main__":

@@ -5,31 +5,34 @@ PART 4: CATEGORICAL PLOTS
 - All plots should be output as PNG files to `data/part4_plots`
 '''
 
-##  UPDATE `part1_etl.py`  ##
-# 1. The charge_no column in arrest events tells us the charge degree and offense category for each arrest charge. 
-# An arrest can have multiple charges. We want to know if an arrest had at least one felony charge.
-# 
-# Use groupby and apply with lambda to create a new dataframe called `felony_charge` that has columns: ['arrest_id', 'has_felony_charge']
-# 
-# Hint 1: One way to do this is that in the lambda function, check to see if a charge_degree is felony, sum these up, and then check if the sum is greater than zero. 
-# Hint 2: Another way to do thisis that in the lambda function, use the `any` function when checking to see if any of the charges in the arrest are a felony
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
 
-# 2. Merge `felony_charge` with `pre_universe` into a new dataframe
+def generate_felony_charge_df(arrest_events):
+    felony_charge = arrest_events.groupby('arrest_id').apply(
+        lambda x: pd.Series({
+            'has_felony_charge': (x['charge_degree'] == 'F').any()
+        })
+    ).reset_index()
+    return felony_charge
 
-# 3. You will need to update ## PART 1: ETL ## in main() to call these two additional dataframes
+def merge_felony_with_universe(felony_charge, pred_universe):
+    return pred_universe.merge(felony_charge, on='arrest_id')
 
-##  PLOTS  ##
-# 1. Create a catplot where the categories are charge type and the y-axis is the prediction for felony rearrest. Set kind='bar'.
+def plot_felony_prediction_by_charge(df):
+    sns.catplot(data=df, x='has_felony_charge', y='prediction_felony', kind='bar')
+    plt.savefig('./data/part4_plots/felony_prediction_by_charge.png', bbox_inches='tight')
+    plt.close()
 
+def plot_nonfelony_prediction_by_charge(df):
+    sns.catplot(data=df, x='has_felony_charge', y='prediction_nonfelony', kind='bar')
+    plt.savefig('./data/part4_plots/nonfelony_prediction_by_charge.png', bbox_inches='tight')
+    plt.close()
+    print("NOTE: Felony charges are often associated with higher perceived risk, which may drive the model's predictions.")
 
-# 2. Now repeat but have the y-axis be prediction for nonfelony rearrest
-# 
-# In a print statement, answer the following question: What might explain the difference between the plots?
-
-
-# 3. Repeat the plot from 1, but hue by whether the person actually got rearrested for a felony crime
-# 
-# In a print statement, answer the following question: 
-# What does it mean that prediction for arrestees with a current felony charge, 
-# but who did not get rearrested for a felony crime have a higher predicted probability than arrestees with a current misdemeanor charge, 
-# but who did get rearrested for a felony crime?
+def plot_felony_prediction_by_charge_and_actual(df):
+    sns.catplot(data=df, x='has_felony_charge', y='prediction_felony', hue='felony_six_month', kind='bar')
+    plt.savefig('./data/part4_plots/felony_prediction_by_charge_and_actual.png', bbox_inches='tight')
+    plt.close()
+    print("INTERPRETATION: The model may rely heavily on the presence of current felony charges in making predictions, sometimes overestimating risk for those who don't reoffend and underestimating risk for those who do.")
